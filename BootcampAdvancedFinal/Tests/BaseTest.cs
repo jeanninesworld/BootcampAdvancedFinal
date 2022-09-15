@@ -1,52 +1,119 @@
 ﻿using BootcampAdvancedFinal.DriverFactory;
+using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
+using TestContext = NUnit.Framework.TestContext;
 
 namespace BootcampAdvancedFinal
 {
-    public class BaseTest
+    [TestFixture]
+    public class BaseTest :BasePage
     {
-        IWebDriver _driver;
-        Page _pages;
+        public BaseTest(IWebDriver driver) : base(driver) { }
+        protected BrowserType _type;
 
-        [SetUp]
-        public void Test_Setup()
-        {
-            //Precondition:  This method will perform setup and will be run prior to executing any one test
-            WebDriverFactory driverFactory = new WebDriverFactory();
-            DriverContext = driverFactory.OpenBrowser();
-            DriverContext.Manage().Window.Maximize();
-            _pages = new Page(DriverContext);
-            _pages.Register();
-            DriverContext.Url = "http://automationpractice.com/index.php";
+        protected WebDriverFactory _driverFactoryInstance;
+        protected Page _pages;
 
-        }
 
-        [TearDown]
-        public void Test_Tear_Down()
-        {
-            //PostCondition:  This method will perform tearing down the test and will run after any one test
-            DriverContext.Quit();
-        }
+       
 
-        protected IWebDriver DriverContext
-        {
-            get { return _driver; }
-            set { _driver = value; }
-        }
+        //[SetUp]
+        //public void Setup()
+        //{
+            
+        //    driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(40);
+        //    driver.Manage().Window.Maximize();          
+            
+        //}
+        //[TearDown]
+        //public void TearDown()
+        //{
+        //    driver.Close();
+        //    driver.Quit();
+        //}
+        //[OneTimeSetUp]
+        //public void BeforeAllTests()
+        //{
 
-        protected Page PageContext
-        {
-            get { return _pages; }
-        }
-        protected Page PagesContext
-        {
-            get
-            {
-                return _pages;
-            }
-        }
+        //}
+        //[OneTimeTearDown]
+        //public void AfterAllTests()
+        //{
+            
+        //    System.Diagnostics.ProcessStartInfo p;
+           
+        //    switch (BrowserTypeContext)
+        //    {
+        //        default:
+        //            p = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/C " + "taskkill /f /im chromedriver.exe");
+        //            break;
+        //        case BrowserType.FireFox:
+        //            p = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/C " + "taskkill /f /im geckodriver.exe");
+        //            break;
+        //        /*case BrowserType.Edge:
+        //            p = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/C " + "taskkill /f /im internetexplorerdriver.exe");
+        //            break; */
+        //    }
+        //    System.Diagnostics.Process proc = new System.Diagnostics.Process();
+        //    proc.StartInfo = p;
+        //    proc.Start();
+        //    proc.WaitForExit();
+        //    proc.Close();
+        //}
+        //public void Dispose()
+        //{
+        //    TearDown();
+        //}
+        //protected IWebDriver Driver
+        //{
+        //    get
+        //    {
+        //        return driver;
+        //    }
+        //    set
+        //    {
+        //        driver = value;
+        //    }
+        //}
+        //protected WebDriverFactory DriverFactoryInstance
+        //{
+        //    get
+        //    {
+        //        return _driverFactoryInstance;
+        //    }
+        //    set
+        //    {
+        //        _driverFactoryInstance = value;
+        //    }
+        //}
+
+        //protected TestContext CurrentTestContext
+        //{
+        //    get
+        //    {
+        //        return TestContext.CurrentContext;
+        //    }
+        //}
+        //protected BrowserType BrowserTypeContext
+        //{
+        //    get
+        //    {
+        //        return _type;
+        //    }
+        //    set
+        //    {
+        //        _type = value;
+        //    }
+        //}
+        //protected Page PagesContext
+        //{
+        //    get
+        //    {
+        //        return _pages;
+        //    }
+        //}
     }
 }

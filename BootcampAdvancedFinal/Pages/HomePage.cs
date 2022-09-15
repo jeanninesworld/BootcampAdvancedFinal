@@ -5,9 +5,10 @@ using System.Threading;
 
 namespace BootcampAdvancedFinal
 {
-    public class HomePage : BasePage
+    public class HomePage : BaseTest
     {
-        public HomePage(IWebDriver driver) : base(driver) { }
+        public HomePage(IWebDriver _driver) : base(_driver) { }
+
         By MyStore = By.XPath("//*[@alt='My Store']");
         By acctLoginBtn = By.Id("navbarLoginButton");
         By emailAddress = By.Name("email");
@@ -20,35 +21,11 @@ namespace BootcampAdvancedFinal
         By regEmail = By.Id("emailControl");
         public HomePage ClickAccountLogin()
         {
-            WaitHelper.WaitForElementPresent(Driver, acctLoginBtn, TimeSpan.FromSeconds(30)).Click();
+            WaitUtils.WaitForElementPresent(driver, acctLoginBtn, TimeSpan.FromSeconds(30)).Click();
             return this;
         }
-        public HomePage EnterEmail(String text)
-        {
-            GetElement(emailAddress, TimeSpan.FromSeconds(8)).SendKeys(text);
-            return this;
-        }
-        public HomePage EnterPassword(String text)
-        {
-            GetElement(password, TimeSpan.FromSeconds(8)).SendKeys(text);
-            return this;
-        }
-        public HomePage ClickLogin()
-        {
-            Thread.Sleep(6000);
-            WaitHelper.WaitForElementPresent(Driver, loginBtn, TimeSpan.FromSeconds(30)).Click();
-            if (WaitHelper.WaitForElementPresent(Driver, invalidEmail, TimeSpan.FromSeconds(8)).Displayed == true)
-                WaitHelper.WaitForElementPresent(Driver, notACustomer, TimeSpan.FromSeconds(30)).Click();
-            else
-                return this;
-            return this;
-        }
-        public HomePage ClickYourBasket()
-        {
-            WaitHelper.WaitForElementPresent(Driver, yourBasketBtn, TimeSpan.FromSeconds(30)).Click();
-            return this;
-        }
-        public String GetViewLabel()
+       
+       public String GetViewLabel()
         {
             return FindVisibleElement(viewLabel, TimeSpan.FromSeconds(8)).Text;
         }

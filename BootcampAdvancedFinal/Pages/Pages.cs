@@ -7,13 +7,13 @@ namespace BootcampAdvancedFinal
         IWebDriver _driver;
         HomePage _homePage;
 
-        public Page(IWebDriver driver)
+        public Page(IWebDriver _driver)
         {
-            _driver = driver;
+            //_driver = driver;
         }
         public void Register()
         {
-            _homePage = new HomePage(Driver);
+            _homePage = new HomePage(_driver);
         }
         public HomePage HomePage
         {
