@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,18 +16,32 @@ namespace BootcampAdvancedFinal.Pages
         {
             get; private set;
         }
+        protected IWebDriver fireFox
+        {
+            get; private set;
+        } 
+        protected IWebDriver edgeDriver
+        {
+            get; private set;
+        }
 
         [SetUp]
         public void Setup()
         {
             this.driver = DriverFactory.WebDriverFactory.GetChromeDriver();
+            this.fireFox = DriverFactory.WebDriverFactory.GetFireFox();
+            this.edgeDriver = DriverFactory.WebDriverFactory.GetEdgeDriver();
         }
 
-        [TearDown]
+    [TearDown]
         public void TearDown()
         {
             driver.Close();
+            fireFox.Close();
+            edgeDriver.Close();
             driver.Quit();
+            fireFox.Quit();
+            edgeDriver.Quit();
         }
     }
 }

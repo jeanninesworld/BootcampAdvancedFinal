@@ -10,24 +10,33 @@ using System.Collections.ObjectModel;
 
 namespace BootcampAdvancedFinal
 {
-    /// <summary>
-    /// This class is the base page that all other page objects inherit from. Includes
-    /// common functionality that can be performed on an application page, and makes
-    /// use of the navigation class for common navigation functionality.
-    /// </summary>
     public class BasePage
     {
         public IWebDriver driver;
+        public IWebDriver fireFox;
+        public IWebDriver edgeDriver;
 
-        public BasePage(IWebDriver driver)
+        public BasePage(IWebDriver driver, IWebDriver fireFox, IWebDriver edgeDriver)
         {
             this.driver = driver;
-
+            this.fireFox = fireFox;
+            this.edgeDriver = edgeDriver;
         }
-        
-        public string GetTitle()
+
+        public string GetChromeTitle()
         {
+            string title = driver.Title;
             return driver.Title;
+        }
+        public string GetFireFoxTitle()
+        {
+            string title = fireFox.Title;
+            return fireFox.Title;
+        }
+        public string GetEdgeTitle()
+        {
+            string title = edgeDriver.Title;
+            return edgeDriver.Title;
         }
         public IWebElement FindVisibleElement(By locator, TimeSpan timeout)
         {
@@ -57,7 +66,7 @@ namespace BootcampAdvancedFinal
 
             return elem;
         }
-        public void EnterText(By locator, String text, TimeSpan timeout)
+        public void EnterTextChrome(By locator, String text, TimeSpan timeout)
         {
             IWebElement elem = null;
             try
@@ -74,7 +83,41 @@ namespace BootcampAdvancedFinal
             }
 
         }
-        public void Click(By locator, TimeSpan timeout)
+        public void EnterTextFireFox(By locator, String text, TimeSpan timeout)
+        {
+            IWebElement elem = null;
+            try
+            {
+                elem = WaitUtils.WaitForElementDisplayed(fireFox, locator, timeout);
+                elem.Clear();
+                elem.SendKeys(text);
+            }
+            catch (StaleElementReferenceException)
+            {
+                elem = WaitUtils.WaitForElementDisplayed(fireFox, locator, timeout);
+                elem.Clear();
+                elem.SendKeys(text);
+            }
+
+        }
+        public void EnterTextEdge(By locator, String text, TimeSpan timeout)
+        {
+            IWebElement elem = null;
+            try
+            {
+                elem = WaitUtils.WaitForElementDisplayed(edgeDriver, locator, timeout);
+                elem.Clear();
+                elem.SendKeys(text);
+            }
+            catch (StaleElementReferenceException)
+            {
+                elem = WaitUtils.WaitForElementDisplayed(edgeDriver, locator, timeout);
+                elem.Clear();
+                elem.SendKeys(text);
+            }
+
+        }
+        public void ClickChrome(By locator, TimeSpan timeout)
         {
             IWebElement elem = null;
             try
@@ -91,7 +134,45 @@ namespace BootcampAdvancedFinal
                 elem = WaitUtils.WaitForElementDisplayed(driver, locator, timeout);
                 elem.Click();
             }
-            
+
+        }
+        public void ClickFireFox(By locator, TimeSpan timeout)
+        {
+            IWebElement elem = null;
+            try
+            {
+                elem = WaitUtils.WaitForElementDisplayed(fireFox, locator, timeout);
+                elem.Click();
+            }
+            catch (ElementNotInteractableException)
+            {
+                JavaScriptClick(locator, timeout);
+            }
+            catch (StaleElementReferenceException)
+            {
+                elem = WaitUtils.WaitForElementDisplayed(fireFox, locator, timeout);
+                elem.Click();
+            }
+
+        }
+        public void ClickEdge(By locator, TimeSpan timeout)
+        {
+            IWebElement elem = null;
+            try
+            {
+                elem = WaitUtils.WaitForElementDisplayed(edgeDriver, locator, timeout);
+                elem.Click();
+            }
+            catch (ElementNotInteractableException)
+            {
+                JavaScriptClick(locator, timeout);
+            }
+            catch (StaleElementReferenceException)
+            {
+                elem = WaitUtils.WaitForElementDisplayed(edgeDriver, locator, timeout);
+                elem.Click();
+            }
+
         }
         public void SelectDropDown(By locator, String optionText, TimeSpan timeout)
         {
@@ -108,20 +189,7 @@ namespace BootcampAdvancedFinal
             }
             
         }
-        public void SelectDropDownByIndex(By locator, int index, TimeSpan timeout)
-        {
-            SelectElement oSelect = null;
-            try
-            {
-                oSelect = WaitUtils.WaitForDropDownPopulated(driver, locator, timeout);
-                oSelect.SelectByIndex(index);
-            }
-            catch (StaleElementReferenceException)
-            {
-                oSelect = WaitUtils.WaitForDropDownPopulated(driver, locator, timeout);
-                oSelect.SelectByIndex(index);
-            }
-        }
+
         public ReadOnlyCollection<IWebElement> FindElements(By locator, TimeSpan timeout)
         {
             ReadOnlyCollection<IWebElement> elems = null;
@@ -279,30 +347,6 @@ namespace BootcampAdvancedFinal
                         break;
                 }
             }
-
         }
-        //public IWebDriver Driver
-        //{
-        //    get { return _driver; }
-        //    set { _driver = value; }
-        //}
-        //public BrowserType GetBrowserName
-        //{
-        //    get
-        //    {
-        //        ICapabilities capabilities = ((RemoteWebDriver)Driver).Capabilities;
-        //        String Name = capabilities.GetCapability(CapabilityType.BrowserName).ToString();
-        //        switch (Name)
-        //        {
-        //            default:
-        //                return BrowserType.Chrome;
-        //            case "edge":
-        //                return BrowserType.Edge;
-        //            case "firefox":
-        //                return BrowserType.FireFox;
-
-        //        }
-        //    }
-        //}
     }
 }

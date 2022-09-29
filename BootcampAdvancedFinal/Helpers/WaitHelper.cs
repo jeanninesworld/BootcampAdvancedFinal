@@ -15,13 +15,15 @@ namespace BootcampAdvancedFinal.Helpers
     /// </summary>
     public static class WaitUtils
     {
+
         private static WebDriverWait _wait;
-        public static bool WaitUntilLoaded(IWebDriver driver, TimeSpan timeout)
+        public static bool WaitUntilLoaded(IWebDriver driver, IWebDriver fireFox, TimeSpan timeout)
         {
             bool readyState = false;
             try
             {
                 _wait = new WebDriverWait(driver, timeout);
+                _wait = new WebDriverWait(fireFox, timeout);
                 _wait.PollingInterval = TimeSpan.FromMilliseconds(500);
                 IJavaScriptExecutor jsExecutor = driver as IJavaScriptExecutor;
                 readyState = _wait.Until((x) =>
@@ -43,6 +45,12 @@ namespace BootcampAdvancedFinal.Helpers
             }
             return readyState;
         }
+
+        internal static IWebElement WaitForElementDisplayed(IWebDriver driver, IWebDriver edgeDriver, By locator, TimeSpan timeout)
+        {
+            throw new NotImplementedException();
+        }
+
         public static IWebElement WaitForElementPresent(IWebDriver driver, By locator, TimeSpan timeout)
         {
             IWebElement element = null;
@@ -53,6 +61,8 @@ namespace BootcampAdvancedFinal.Helpers
                 _wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
                 _wait.Until(drv => drv.FindElements(locator).Any());
                 element = driver.FindElement(locator);
+                //element = fireFox.FindElement(locator);
+                //element = edgeDriver.FindElement(locator);
             }
             catch (WebDriverTimeoutException ex)
             {
@@ -114,7 +124,7 @@ namespace BootcampAdvancedFinal.Helpers
             }
             return isPresent;
         }
-        public static Boolean IsElementNotPresent(IWebDriver driver, By locator, TimeSpan timeout)
+        public static Boolean IsElementNotPresent(IWebDriver driver, IWebDriver fireFox,By locator, TimeSpan timeout)
         {
             Boolean isNotPresent = false;
             try
@@ -174,7 +184,7 @@ namespace BootcampAdvancedFinal.Helpers
             }
             return element;
         }
-        public static Boolean IsElementContainingText(IWebDriver driver, By locator, String text, TimeSpan timeout)
+        public static Boolean IsElementContainingText(IWebDriver driver, IWebDriver fireFox, IWebDriver edgeDriver, By locator, String text, TimeSpan timeout)
         {
             Boolean containsText = false;
             try
@@ -196,7 +206,7 @@ namespace BootcampAdvancedFinal.Helpers
             }
             return containsText;
         }
-        public static Boolean IsElementNotContainingText(IWebDriver driver, By locator, String text, TimeSpan timeout)
+        public static Boolean IsElementNotContainingText(IWebDriver driver, IWebDriver fireFox, IWebDriver edgeDriver, By locator, String text, TimeSpan timeout)
         {
             Boolean textNotAvailable = false;
             try
@@ -218,7 +228,7 @@ namespace BootcampAdvancedFinal.Helpers
             }
             return textNotAvailable;
         }
-        public static IWebElement WaitForElementContainingText(IWebDriver driver, By locator, String text, TimeSpan timeout)
+        public static IWebElement WaitForElementContainingText(IWebDriver driver, IWebDriver fireFox, IWebDriver edgeDriver, By locator, String text, TimeSpan timeout)
         {
             IWebElement element = null;
             try
@@ -226,7 +236,7 @@ namespace BootcampAdvancedFinal.Helpers
                 _wait = new WebDriverWait(driver, timeout);
                 _wait.PollingInterval = TimeSpan.FromMilliseconds(500);
                 _wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
-                if (IsElementContainingText(driver, locator, text, timeout) == true)
+                if (IsElementContainingText(driver, fireFox, edgeDriver, locator, text, timeout) == true)
                 {
                     element = driver.FindElement(locator);
                 }
@@ -326,7 +336,7 @@ namespace BootcampAdvancedFinal.Helpers
             }
             return isNotSelected;
         }
-        public static Boolean IsAttributePresent(IWebDriver driver, By locator, String attribute, TimeSpan timeout)
+        public static Boolean IsAttributePresent(IWebDriver driver, IWebDriver fireFox, IWebDriver edgeDriver, By locator, String attribute, TimeSpan timeout)
         {
             Boolean isAttributePresent = false;
             try
@@ -345,7 +355,7 @@ namespace BootcampAdvancedFinal.Helpers
             }
             return isAttributePresent;
         }
-        public static Boolean IsAttributeValueFound(IWebDriver driver, By locator, String attribute, String value, TimeSpan timeout)
+        public static Boolean IsAttributeValueFound(IWebDriver driver, IWebDriver fireFox, IWebDriver edgeDriver, By locator, String attribute, String value, TimeSpan timeout)
         {
             Boolean isValueFound = false;
             try
@@ -364,7 +374,7 @@ namespace BootcampAdvancedFinal.Helpers
             }
             return isValueFound;
         }
-        public static Boolean IsAttributeValueNotFound(IWebDriver driver, By locator, String attribute, String value, TimeSpan timeout)
+        public static Boolean IsAttributeValueNotFound(IWebDriver driver, IWebDriver fireFox, IWebDriver edgeDriver, By locator, String attribute, String value, TimeSpan timeout)
         {
             Boolean isValueNotFound = false;
             try
@@ -383,7 +393,7 @@ namespace BootcampAdvancedFinal.Helpers
             }
             return isValueNotFound;
         }
-        public static Boolean IsAttributeClassFound(IWebDriver driver, By locator, String attribute, String value, TimeSpan timeout)
+        public static Boolean IsAttributeClassFound(IWebDriver driver, IWebDriver fireFox, IWebDriver edgeDriver, By locator, String attribute, String value, TimeSpan timeout)
         {
             Boolean isValueFound = false;
             try
@@ -402,7 +412,7 @@ namespace BootcampAdvancedFinal.Helpers
             }
             return isValueFound;
         }
-        public static Boolean IsAttributeClassNotFound(IWebDriver driver, By locator, String attribute, String value, TimeSpan timeout)
+        public static Boolean IsAttributeClassNotFound(IWebDriver driver, IWebDriver fireFox, IWebDriver edgeDriver, By locator, String attribute, String value, TimeSpan timeout)
         {
             Boolean isValueNotFound = false;
             try
@@ -446,10 +456,14 @@ namespace BootcampAdvancedFinal.Helpers
             try
             {
                 _wait = new WebDriverWait(driver, timeout);
+                //_wait = new WebDriverWait(fireFox, timeout);
+                //_wait = new WebDriverWait(edgeDriver, timeout);
                 _wait.PollingInterval = TimeSpan.FromMilliseconds(500);
                 _wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
                 _wait.Until(drv => drv.FindElement(locator).Displayed == true);
                 element = driver.FindElement(locator);
+                //element = fireFox.FindElement(locator);
+                //element = edgeDriver.FindElement(locator);
             }
             catch (WebDriverTimeoutException ex)
             {
@@ -457,7 +471,7 @@ namespace BootcampAdvancedFinal.Helpers
             }
             return element;
         }
-        public static Boolean IsAdditionalTabDisplayed(IWebDriver driver, TimeSpan timeout)
+        public static Boolean IsAdditionalTabDisplayed(IWebDriver driver, IWebDriver fireFox,TimeSpan timeout)
         {
             Boolean isDisplayed = false;
             try
@@ -476,7 +490,7 @@ namespace BootcampAdvancedFinal.Helpers
             }
             return isDisplayed;
         }
-        public static Boolean IsDropDownTextAvailable(IWebDriver driver, By locator, String textOption, TimeSpan timeout)
+        public static Boolean IsDropDownTextAvailable(IWebDriver driver, IWebDriver fireFox, IWebDriver edgeDriver, By locator, String textOption, TimeSpan timeout)
         {
             Boolean isDisplayed = false;
             try
@@ -499,7 +513,7 @@ namespace BootcampAdvancedFinal.Helpers
             }
             return isDisplayed;
         }
-        public static Boolean IsDropDownPopulated(IWebDriver driver, By locator, String textOption, TimeSpan timeout)
+        public static Boolean IsDropDownPopulated(IWebDriver driver, IWebDriver fireFox, IWebDriver edgeDriver, By locator, String textOption, TimeSpan timeout)
         {
             Boolean isDisplayed = false;
             try
@@ -507,7 +521,7 @@ namespace BootcampAdvancedFinal.Helpers
                 _wait = new WebDriverWait(driver, timeout);
                 _wait.PollingInterval = TimeSpan.FromMilliseconds(500);
                 _wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
-                if (IsElementVisible(driver, locator, timeout) == true)
+                if (IsElementVisible(driver, locator, timeout) == true) 
                 {
                     SelectElement oSelect = new SelectElement(WaitForElementDisplayed(driver, locator, timeout));
                     if (oSelect.Options.Count >= 1)
