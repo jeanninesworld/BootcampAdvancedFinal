@@ -27,46 +27,54 @@ namespace BootcampAdvancedFinal.Tests
             driver.Navigate().GoToUrl(chromeUrl);
             fireFox.Navigate().GoToUrl(fireFoxUrl);
             edgeDriver.Navigate().GoToUrl(edgeDriverUrl);
+        }
 
+        public void LoginToMyAccount()
+        {
+            //chrome
             homePage.GetChromeTitle().Should().Be("My Store");
-            homePage.GetFireFoxTitle().Should().Be("My Store");
-            homePage.GetEdgeTitle().Should().Be("My Store");
-
             homePage.ClickAccountLoginChrome();
-            homePage.ClickAccountLoginFireFox();
-            homePage.ClickAccountLoginEdge();
-
             homePage.EnterEmailAddressChrome("jeanninesworld9@gmail.com");
-            homePage.EnterEmailAddressFireFox("jeanninesworld9@gmail.com");
-            homePage.EnterEmailAddressEdge("jeanninesworld9@gmail.com");
-
             homePage.EnterPasswordChrome("Password");
-            homePage.EnterPasswordAddressFireFox("Password");
-            homePage.EnterPasswordAddressEdge("Password");
-
             homePage.ClickSignInBtnChrome();
+
+            //firefox
+            homePage.GetFireFoxTitle().Should().Be("My Store");
+            homePage.ClickAccountLoginFireFox();
+            homePage.EnterEmailAddressFireFox("jeanninesworld9@gmail.com");
+            homePage.EnterPasswordAddressFireFox("Password");
             homePage.ClickSignInBtnFireFox();
+
+            //edge
+            homePage.GetEdgeTitle().Should().Be("My Store");          
+            homePage.ClickAccountLoginEdge();          
+            homePage.EnterEmailAddressEdge("jeanninesworld9@gmail.com");           
+            homePage.EnterPasswordAddressEdge("Password");
             homePage.ClickSignInBtnEdge();
         }
 
         [Test(Description = "Login and Logout Verification")]
         [TestCase(TestName = "Validate Login & Logout ")]
-        public void LoginAndLogout()
+        public void LoginAndLogoutTests()
         {
+            LoginToMyAccount();
+
+            //chrome
             homePage.GetViewLabelChrome().Should().Be("MY ACCOUNT");
-            homePage.GetViewLabelFireFox().Should().Be("MY ACCOUNT");
-            homePage.GetViewLabelEdge().Should().Be("MY ACCOUNT");
-
             homePage.VerifyAccountOptionsChrome().Should().Be("ORDER HISTORY AND DETAILS\r\nMY CREDIT SLIPS\r\nMY ADDRESSES\r\nMY PERSONAL INFORMATION\r\nMY WISHLISTS");
-            homePage.VerifyAccountOptionsFireFox().Should().Be("ORDER HISTORY AND DETAILS\r\nMY CREDIT SLIPS\r\nMY ADDRESSES\r\nMY PERSONAL INFORMATION\r\nMY WISHLISTS");
-            homePage.VerifyAccountOptionsEdge().Should().Be("ORDER HISTORY AND DETAILS\r\nMY CREDIT SLIPS\r\nMY ADDRESSES\r\nMY PERSONAL INFORMATION\r\nMY WISHLISTS");
-
             homePage.ClickAccountLogOutChrome();
-            homePage.ClickAccountLogOutFireFox();
-            homePage.ClickAccountLogOutEdge();
-
             homePage.VerifyLoggedOutChrome().Should().Be("AUTHENTICATION");
+
+            //firefox
+            homePage.GetViewLabelFireFox().Should().Be("MY ACCOUNT");
+            homePage.VerifyAccountOptionsFireFox().Should().Be("ORDER HISTORY AND DETAILS\r\nMY CREDIT SLIPS\r\nMY ADDRESSES\r\nMY PERSONAL INFORMATION\r\nMY WISHLISTS");
+            homePage.ClickAccountLogOutFireFox();
             homePage.VerifyLoggedOutFireFox().Should().Be("AUTHENTICATION");
+
+            //edge
+            homePage.GetViewLabelEdge().Should().Be("MY ACCOUNT");
+            homePage.VerifyAccountOptionsEdge().Should().Be("ORDER HISTORY AND DETAILS\r\nMY CREDIT SLIPS\r\nMY ADDRESSES\r\nMY PERSONAL INFORMATION\r\nMY WISHLISTS");
+            homePage.ClickAccountLogOutEdge();
             homePage.VerifyLoggedOutEdge().Should().Be("AUTHENTICATION");
         }
 
@@ -74,12 +82,16 @@ namespace BootcampAdvancedFinal.Tests
         [TestCase(TestName = "Validate Search functionality works")]
         public void SearchFunctionality()
         {
-            searchPage.SearchBlouseChrome("Blouse");
-            searchPage.SearchBlouseFireFox("Blouse");
-            searchPage.SearchBlouseEdge("Blouse");
-
+            //chrome
+            searchPage.SearchBlouseChrome("Blouse");         
             searchPage.VerifySearchReturnedChrome().Should().Contain("Blouse");
+
+            //firefox
+            searchPage.SearchBlouseFireFox("Blouse");
             searchPage.VerifySearchReturnedFireFox().Should().Contain("Blouse");
+
+            //edge
+            searchPage.SearchBlouseEdge("Blouse");            
             searchPage.VerifySearchReturnedEdge().Should().Contain("Blouse");
         }
 
@@ -87,28 +99,30 @@ namespace BootcampAdvancedFinal.Tests
         [TestCase(TestName = "Validate message to customer service")]
         public void MessageToCustomerService()
         {
+            LoginToMyAccount();
+
+            //Chrome
             contactUsPage.ClickContactUsChrome();
-            contactUsPage.ClickContactUsFireFox();
-            contactUsPage.ClickContactUsEdge();
-
             contactUsPage.VerifyViewLabelChrome().Should().Be("CUSTOMER SERVICE - CONTACT US");
-            contactUsPage.VerifyViewLabelFireFox().Should().Be("CUSTOMER SERVICE - CONTACT US");
-            contactUsPage.VerifyViewLabelEdge().Should().Be("CUSTOMER SERVICE - CONTACT US");
-
             contactUsPage.SelectSubjectChrome();
-            contactUsPage.SelectSubjectFireFox();
-            contactUsPage.SelectSubjectEdge();
-
             contactUsPage.EnterMessageChrome("Test Message to customer service");
-            contactUsPage.EnterMessageFireFox("Test Message to customer service");
-            contactUsPage.EnterMessageEdge("Test Message to customer service");
-
             contactUsPage.ClickSendChrome();
-            contactUsPage.ClickSendFireFox();
-            contactUsPage.ClickSendEdge();
-
             contactUsPage.VerifySuccessMessageChrome().Should().Be("Your message has been successfully sent to our team.");
+        
+            //firefox
+            contactUsPage.ClickContactUsFireFox();
+            contactUsPage.VerifyViewLabelFireFox().Should().Be("CUSTOMER SERVICE - CONTACT US");
+            contactUsPage.SelectSubjectFireFox();
+            contactUsPage.EnterMessageFireFox("Test Message to customer service");
+            contactUsPage.ClickSendFireFox();
             contactUsPage.VerifySuccessMessageFireFox().Should().Be("Your message has been successfully sent to our team.");
+
+            //edge
+            contactUsPage.ClickContactUsEdge();
+            contactUsPage.VerifyViewLabelEdge().Should().Be("CUSTOMER SERVICE - CONTACT US");
+            contactUsPage.SelectSubjectEdge();
+            contactUsPage.EnterMessageEdge("Test Message to customer service");
+            contactUsPage.ClickSendEdge();
             contactUsPage.VerifySuccessMessageEdge().Should().Be("Your message has been successfully sent to our team.");
         }
 

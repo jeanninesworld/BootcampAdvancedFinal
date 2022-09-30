@@ -9,28 +9,27 @@ namespace BootcampAdvancedFinal
     {
         public ContactUsPage(IWebDriver _driver, IWebDriver fireFox, IWebDriver edgeDriver) : base(_driver, fireFox, edgeDriver) { }
 
-        By contactUsBtn = By.XPath("//a[@title='Contact Us']");
+        By contactUsBtn = By.XPath("//div[@id='contact-link']");
         By viewLabel = By.XPath("//h1");
-        By subjectHeading = By.XPath("//select[@id='id_contact']");
+        By subjectHeading = By.XPath("//div[@id='uniform-id_contact']");
         By customerService = By.XPath("//option[@value='2']");
         By messageBody = By.XPath("//textarea[@id='message']");
         By sendBtn = By.XPath("//button[@id='submitMessage']");
         By confirmationMessage = By.XPath("//p[@class='alert alert-success']");
 
-
         public ContactUsPage ClickContactUsChrome()
         {
-            ClickChrome(contactUsBtn, TimeSpan.FromSeconds(60));            
+            ClickChrome(contactUsBtn, TimeSpan.FromSeconds(30));            
             return this;
         }
         public ContactUsPage ClickContactUsFireFox()
         {
-            ClickFireFox(contactUsBtn, TimeSpan.FromSeconds(60));
+            ClickFireFox(contactUsBtn, TimeSpan.FromSeconds(30));
             return this;
         }
         public ContactUsPage ClickContactUsEdge()
         {
-            ClickEdge(contactUsBtn, TimeSpan.FromSeconds(60));
+            ClickEdge(contactUsBtn, TimeSpan.FromSeconds(30));
             return this;
         }
         public String VerifyViewLabelChrome()
@@ -50,53 +49,53 @@ namespace BootcampAdvancedFinal
         }
         public ContactUsPage SelectSubjectChrome()
         {
-            ClickChrome(subjectHeading, TimeSpan.FromSeconds(60));
-            ClickChrome(customerService, TimeSpan.FromSeconds(60));
+            ClickChrome(subjectHeading, TimeSpan.FromSeconds(30));
+            ClickChrome(customerService, TimeSpan.FromSeconds(30));
             return this;
         }
         public ContactUsPage SelectSubjectFireFox()
         {
-            ClickFireFox(subjectHeading, TimeSpan.FromSeconds(60));
-            ClickFireFox(customerService, TimeSpan.FromSeconds(60));
+            ClickFireFox(subjectHeading, TimeSpan.FromSeconds(30));
+            ClickFireFox(customerService, TimeSpan.FromSeconds(30));
             return this;
         }
         public ContactUsPage SelectSubjectEdge()
         {
-            ClickEdge(subjectHeading, TimeSpan.FromSeconds(60));
-            ClickEdge(customerService, TimeSpan.FromSeconds(60));
+            ClickEdge(subjectHeading, TimeSpan.FromSeconds(30));
+            ClickEdge(customerService, TimeSpan.FromSeconds(30));
             return this;
         }
         public ContactUsPage EnterMessageChrome(String text)
         {
-            ClickChrome(messageBody, TimeSpan.FromSeconds(60));
-            EnterTextChrome(messageBody, text, TimeSpan.FromSeconds(60));
+            ClickChrome(messageBody, TimeSpan.FromSeconds(30));
+            EnterTextChrome(messageBody, text, TimeSpan.FromSeconds(30));
             return this;
         }
         public ContactUsPage EnterMessageFireFox(String text)
         {
-            ClickFireFox(messageBody, TimeSpan.FromSeconds(60));
-            EnterTextFireFox(messageBody, text, TimeSpan.FromSeconds(60));
+            ClickFireFox(messageBody, TimeSpan.FromSeconds(30));
+            EnterTextFireFox(messageBody, text, TimeSpan.FromSeconds(30));
             return this;
         }
         public ContactUsPage EnterMessageEdge(String text)
         {
-            ClickEdge(messageBody, TimeSpan.FromSeconds(60));
-            EnterTextEdge(messageBody, text, TimeSpan.FromSeconds(60));
+            ClickEdge(messageBody, TimeSpan.FromSeconds(30));
+            EnterTextEdge(messageBody, text, TimeSpan.FromSeconds(30));
             return this;
         }
         public ContactUsPage ClickSendChrome()
         {
-            ClickChrome(sendBtn, TimeSpan.FromSeconds(60));
+            ClickChrome(sendBtn, TimeSpan.FromSeconds(30));
             return this;
         }
         public ContactUsPage ClickSendFireFox()
         {
-            ClickFireFox(sendBtn, TimeSpan.FromSeconds(60));
+            ClickFireFox(sendBtn, TimeSpan.FromSeconds(30));
             return this;
         }
         public ContactUsPage ClickSendEdge()
         {
-            ClickEdge(sendBtn, TimeSpan.FromSeconds(60));
+            ClickEdge(sendBtn, TimeSpan.FromSeconds(30));
             return this;
         }
 

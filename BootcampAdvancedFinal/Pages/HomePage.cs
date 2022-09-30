@@ -36,70 +36,70 @@ namespace BootcampAdvancedFinal
         }
         public HomePage ClickAccountLoginChrome()
         {
-            ClickChrome(signIn, TimeSpan.FromSeconds(60));
+            ClickChrome(signIn, TimeSpan.FromSeconds(30));
             return this;
         }
         public HomePage ClickAccountLoginFireFox()
         {
-            ClickFireFox(signIn, TimeSpan.FromSeconds(60));
+            ClickFireFox(signIn, TimeSpan.FromSeconds(30));
             return this;
         }
         public HomePage ClickAccountLoginEdge()
         {
-            ClickEdge(signIn, TimeSpan.FromSeconds(60));
+            ClickEdge(signIn, TimeSpan.FromSeconds(30));
             return this;
         }
         public HomePage EnterEmailAddressChrome(String text)
         {
-            ClickChrome(emailAddress, TimeSpan.FromSeconds(60));
-            EnterTextChrome(emailAddress, text, TimeSpan.FromSeconds(60));
+            ClickChrome(emailAddress, TimeSpan.FromSeconds(30));
+            EnterTextChrome(emailAddress, text, TimeSpan.FromSeconds(30));
             return this;
         }
         public HomePage EnterEmailAddressFireFox(String text)
         {
-            ClickFireFox(emailAddress, TimeSpan.FromSeconds(60));
-            EnterTextFireFox(emailAddress, text, TimeSpan.FromSeconds(60));
+            ClickFireFox(emailAddress, TimeSpan.FromSeconds(30));
+            EnterTextFireFox(emailAddress, text, TimeSpan.FromSeconds(30));
             return this;
         }
         public HomePage EnterEmailAddressEdge(String text)
         {
-            ClickEdge(emailAddress, TimeSpan.FromSeconds(60));
-            EnterTextEdge(emailAddress, text, TimeSpan.FromSeconds(60));
+            ClickEdge(emailAddress, TimeSpan.FromSeconds(30));
+            EnterTextEdge(emailAddress, text, TimeSpan.FromSeconds(30));
             return this;
         }
         public HomePage EnterPasswordChrome(String text)
         {
-            ClickChrome(password, TimeSpan.FromSeconds(60));
-            EnterTextChrome(password, text, TimeSpan.FromSeconds(60));
+            ClickChrome(password, TimeSpan.FromSeconds(30));
+            EnterTextChrome(password, text, TimeSpan.FromSeconds(30));
             return this;
         }
         public HomePage EnterPasswordAddressFireFox(String text)
         {
-            ClickFireFox(password, TimeSpan.FromSeconds(60));
-            EnterTextFireFox(password, text, TimeSpan.FromSeconds(60));
+            ClickFireFox(password, TimeSpan.FromSeconds(30));
+            EnterTextFireFox(password, text, TimeSpan.FromSeconds(30));
             return this;
         }
         public HomePage EnterPasswordAddressEdge(String text)
         {
-            ClickEdge(password, TimeSpan.FromSeconds(60));
-            EnterTextEdge(password, text, TimeSpan.FromSeconds(60));
+            ClickEdge(password, TimeSpan.FromSeconds(30));
+            EnterTextEdge(password, text, TimeSpan.FromSeconds(30));
             return this;
         }
 
 
         public HomePage ClickSignInBtnChrome()
         {
-            ClickChrome(signInBtn, TimeSpan.FromSeconds(60));
+            ClickChrome(signInBtn, TimeSpan.FromSeconds(30));
             return this;
         }
         public HomePage ClickSignInBtnFireFox()
         {
-            ClickFireFox(signInBtn, TimeSpan.FromSeconds(60));
+            ClickFireFox(signInBtn, TimeSpan.FromSeconds(30));
             return this;
         }
         public HomePage ClickSignInBtnEdge()
         {
-            ClickEdge(signInBtn, TimeSpan.FromSeconds(60));
+            ClickEdge(signInBtn, TimeSpan.FromSeconds(30));
             return this;
         }
 
@@ -120,17 +120,17 @@ namespace BootcampAdvancedFinal
         }
         public HomePage ClickAccountLogOutChrome()
         {
-            ClickChrome(signOut, TimeSpan.FromSeconds(60));
+            ClickChrome(signOut, TimeSpan.FromSeconds(30));
             return this;
         }
         public HomePage ClickAccountLogOutFireFox()
         {
-            ClickFireFox(signOut, TimeSpan.FromSeconds(60));
+            ClickFireFox(signOut, TimeSpan.FromSeconds(30));
             return this;
         }
         public HomePage ClickAccountLogOutEdge()
         {
-            ClickEdge(signOut, TimeSpan.FromSeconds(60));
+            ClickEdge(signOut, TimeSpan.FromSeconds(30));
             return this;
         }
         public String VerifyLoggedOutChrome()
