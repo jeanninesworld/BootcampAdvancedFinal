@@ -8,6 +8,8 @@ namespace BootcampAdvancedFinal
         IWebDriver fireFox;
         IWebDriver edgeDriver;
         HomePage _homePage;
+        SearchPage searchPage;
+        ContactUsPage contactUsPage;
 
         /* public Page(IWebDriver _driver, IWebDriver fireFox)
         {
@@ -16,19 +18,25 @@ namespace BootcampAdvancedFinal
         } */
         public Page(IWebDriver _driver, IWebDriver fireFox, IWebDriver edgeDriver)
         {
-            //_driver = _driver;
-            //fireFox = fireFox;
-            //edgeDriver = edgeDriver
         }
         public void Register()
         {
             _homePage = new HomePage(_driver, fireFox, edgeDriver);
+            searchPage = new SearchPage(_driver, fireFox, edgeDriver);
+            contactUsPage = new ContactUsPage(_driver, fireFox, edgeDriver);
         }
         public HomePage HomePage
         {
             get
             {
                 return _homePage;
+            }
+        }
+        public SearchPage SearchPage
+        {
+            get
+            {
+                return searchPage;
             }
         }
 
