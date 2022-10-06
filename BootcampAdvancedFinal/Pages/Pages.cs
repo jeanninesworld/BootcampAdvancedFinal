@@ -10,12 +10,8 @@ namespace BootcampAdvancedFinal
         HomePage _homePage;
         SearchPage searchPage;
         ContactUsPage contactUsPage;
+        CartPage cartPage;
 
-        /* public Page(IWebDriver _driver, IWebDriver fireFox)
-        {
-            //_driver = driver;
-
-        } */
         public Page(IWebDriver _driver, IWebDriver fireFox, IWebDriver edgeDriver)
         {
         }
@@ -24,6 +20,7 @@ namespace BootcampAdvancedFinal
             _homePage = new HomePage(_driver, fireFox, edgeDriver);
             searchPage = new SearchPage(_driver, fireFox, edgeDriver);
             contactUsPage = new ContactUsPage(_driver, fireFox, edgeDriver);
+            cartPage = new CartPage(_driver, fireFox, edgeDriver);
         }
         public HomePage HomePage
         {

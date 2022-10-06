@@ -46,8 +46,7 @@ namespace BootcampAdvancedFinal.DriverFactory
 
             string startupPath = System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).
             Parent.Parent.FullName + @"\drivers";
-            //var service = FirefoxDriverService.CreateDefaultService(startupPath, "geckodriver.exe");
-
+            
             FirefoxOptions firefoxOptions = new FirefoxOptions();
 
             //firefoxOptions.AddArgument("--headless");

@@ -205,6 +205,7 @@
     <Compile Include="Helpers\WaitHelper.cs" />
     <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Pages\BrowserType.cs" />
+    <Compile Include="Pages\CartPage.cs" />
     <Compile Include="Pages\ContactUsPage.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Pages\Pages.cs" />

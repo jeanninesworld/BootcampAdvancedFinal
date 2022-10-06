@@ -295,6 +295,7 @@ namespace BootcampAdvancedFinal
             }
 
         }
+
         public void JavaScriptClickForElementDisplayed(By locator, By targetedLocator, int numOfAttempts, TimeSpan timeout)
         {
             IWebElement elem = null;
