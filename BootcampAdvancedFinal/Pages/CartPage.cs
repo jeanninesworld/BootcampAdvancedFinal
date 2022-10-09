@@ -69,10 +69,8 @@ namespace BootcampAdvancedFinal
         //Chrome-SelectDressesCategory
 
         public CartPage SelectDressesCategoryChrome()
-        {
-            
+        {            
             WaitUtils.WaitForElementDisplayed(driver, dressesCategory, TimeSpan.FromSeconds(30)).Click();
-//            Thread.Sleep(5000);
             return this;
         }
         public String VerifyDressesCategoryChrome()

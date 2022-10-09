@@ -12,9 +12,7 @@ namespace BootcampAdvancedFinal
         ContactUsPage contactUsPage;
         CartPage cartPage;
 
-        public Page(IWebDriver _driver, IWebDriver fireFox, IWebDriver edgeDriver)
-        {
-        }
+        public Page(IWebDriver _driver, IWebDriver fireFox, IWebDriver edgeDriver) {}
         public void Register()
         {
             _homePage = new HomePage(_driver, fireFox, edgeDriver);

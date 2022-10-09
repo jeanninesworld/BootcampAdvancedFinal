@@ -14,6 +14,7 @@ namespace BootcampAdvancedFinal.Tests
         SearchPage searchPage;
         ContactUsPage contactUsPage;
         CartPage cartPage;
+        AddToWishlist addToWishlist;
 
         static string chromeUrl = "http://automationpractice.com/index.php";
         static string fireFoxUrl = "http://automationpractice.com/index.php";    
@@ -26,6 +27,7 @@ namespace BootcampAdvancedFinal.Tests
             searchPage = new SearchPage(this.driver, this.fireFox, this.edgeDriver);
             contactUsPage = new ContactUsPage(this.driver, this.fireFox, this.edgeDriver);
             cartPage = new CartPage(this.driver, this.fireFox, this.edgeDriver);
+            addToWishlist = new AddToWishlist(this.driver, this.fireFox, this.edgeDriver);
 
             driver.Navigate().GoToUrl(chromeUrl);
             fireFox.Navigate().GoToUrl(fireFoxUrl);
@@ -82,7 +84,6 @@ namespace BootcampAdvancedFinal.Tests
         }
 
         [Test(Description = "Search Functionality")]
-
         [TestCase(TestName = "ValidateSearch")]
         public void SearchFunctionality()
         {
@@ -132,44 +133,43 @@ namespace BootcampAdvancedFinal.Tests
 
         [Test(Description = "Add different quantities of products to the cart from each category ")]
         [TestCase(TestName = "ValidateAdd/EditCart")]
-        public void AddEditCart()
+        public void AddEditCartVerification()
         {
-            //LoginToMyAccount();
 
             //Chrome
-            //cartPage.SelectWomensTopsCategoryChrome();
-            //cartPage.VerifyTopsCategoryChrome().Contains("Tops");
-            //cartPage.SelectWomensBlouseTopSizeColorChrome();
-            //cartPage.AddToCartChrome();
-            //cartPage.VerifySuccessMessageChrome().Should().Be("Product successfully added to your shopping cart");
-            //cartPage.ClickContinueShoppingChrome();
+            cartPage.SelectWomensTopsCategoryChrome();
+            cartPage.VerifyTopsCategoryChrome().Contains("Tops");
+            cartPage.SelectWomensBlouseTopSizeColorChrome();
+            cartPage.AddToCartChrome();
+            cartPage.VerifySuccessMessageChrome().Should().Be("Product successfully added to your shopping cart");
+            cartPage.ClickContinueShoppingChrome();
 
-            //cartPage.SelectDressesCategoryChrome();
-            //cartPage.VerifyDressesCategoryChrome().Contains("Dresses");
-            //cartPage.SelectWomensDressSizeColorChrome();
-            //cartPage.AddToCartChrome();
-            //cartPage.VerifySuccessMessageChrome().Should().Be("Product successfully added to your shopping cart");
-            //cartPage.ClickContinueShoppingChrome();
+            cartPage.SelectDressesCategoryChrome();
+            cartPage.VerifyDressesCategoryChrome().Contains("Dresses");
+            cartPage.SelectWomensDressSizeColorChrome();
+            cartPage.AddToCartChrome();
+            cartPage.VerifySuccessMessageChrome().Should().Be("Product successfully added to your shopping cart");
+            cartPage.ClickContinueShoppingChrome();
 
-            //cartPage.SelectTShirtsCategoryChrome();
-            //cartPage.VerifyTShirtsCategoryChrome().Contains("Dresses");
-            //cartPage.SelectTShirtsSizeColorChrome();
-            //cartPage.AddToCartChrome();
-            //cartPage.VerifySuccessMessageChrome().Should().Be("Product successfully added to your shopping cart");
-            //cartPage.ClickContinueShoppingChrome();
+            cartPage.SelectTShirtsCategoryChrome();
+            cartPage.VerifyTShirtsCategoryChrome().Contains("Dresses");
+            cartPage.SelectTShirtsSizeColorChrome();
+            cartPage.AddToCartChrome();
+            cartPage.VerifySuccessMessageChrome().Should().Be("Product successfully added to your shopping cart");
+            cartPage.ClickContinueShoppingChrome();
 
-            //cartPage.ClickCartChrome();
-            //cartPage.VerifyShoppingCartChrome().Should().Contain("Your shopping cart contains: 7 Products");
+            cartPage.ClickCartChrome();
+            cartPage.VerifyShoppingCartChrome().Should().Contain("Your shopping cart contains: 7 Products");
 
-            //cartPage.VerifyChifonSizeColorDetailsChrome().Should().Be("Printed Chiffon Dress\r\nSKU : demo_7\r\nColor : Green, Size : M");
-            //cartPage.VerifyTShirtSizeColorDetailsChrome().Should().Be("Faded Short Sleeve T-shirts\r\nSKU : demo_1\r\nColor : Blue, Size : M");
-            //cartPage.VerifyBlouseSizeColorDetailsChrome().Should().Be("Blouse\r\nSKU : demo_2\r\nColor : White, Size : M");
+            cartPage.VerifyChifonSizeColorDetailsChrome().Should().Be("Printed Chiffon Dress\r\nSKU : demo_7\r\nColor : Green, Size : M");
+            cartPage.VerifyTShirtSizeColorDetailsChrome().Should().Be("Faded Short Sleeve T-shirts\r\nSKU : demo_1\r\nColor : Blue, Size : M");
+            cartPage.VerifyBlouseSizeColorDetailsChrome().Should().Be("Blouse\r\nSKU : demo_2\r\nColor : White, Size : M");
 
-            //cartPage.AddQuantityChifonDressChrome();
-            //cartPage.VerifyShoppingCartChrome().Should().Contain("Your shopping cart contains: 8 Products");
+            cartPage.AddQuantityChifonDressChrome();
+            cartPage.VerifyShoppingCartChrome().Should().Contain("Your shopping cart contains: 8 Products");
 
-            //cartPage.MinusQuantityTShirtChrome();
-            //cartPage.VerifyShoppingCartChrome().Should().Contain("Your shopping cart contains: 7 Products");
+            cartPage.MinusQuantityTShirtChrome();
+            cartPage.VerifyShoppingCartChrome().Should().Contain("Your shopping cart contains: 7 Products");
 
             //firefox
             cartPage.SelectWomensTopsCategoryFireFox();
@@ -241,7 +241,46 @@ namespace BootcampAdvancedFinal.Tests
 
             cartPage.MinusQuantityTShirtEdge();
             cartPage.VerifyShoppingCartEdge().Should().Contain("Your shopping cart contains: 7 Products");
+        }
 
+        [Test(Description = "Add to Wishlist Verification")]
+        [TestCase(TestName = "ValidateAddToWishList")]
+        public void WishListVerification()
+        {
+            LoginToMyAccount();
+
+            //chrome
+            addToWishlist.SelectDressesCategoryChrome();
+            addToWishlist.SelectWomensChifonDressChrome();
+            addToWishlist.SelectAddToWishlistChrome();
+            addToWishlist.VerifyFancyErrorChrome().Should().Be("Added to your wishlist.");
+            addToWishlist.CloseFancyErrorChrome();
+            addToWishlist.SelectViewMyAccountChrome();
+            addToWishlist.SelectMyWishlistChrome();
+            addToWishlist.SelectViewMyWishlistChrome();
+            addToWishlist.VerifyWishlistDetailsChrome().Should().Contain("Printed Chiffon Dress\r\nS, Yellow");
+           
+            //FireFox
+            addToWishlist.SelectDressesCategoryFireFox();
+            addToWishlist.SelectWomensChifonDressFireFox();
+            addToWishlist.SelectAddToWishlistFireFox();
+            addToWishlist.VerifyFancyErrorFireFox().Should().Be("Added to your wishlist.");
+            addToWishlist.CloseFancyErrorFireFox();
+            addToWishlist.SelectViewMyAccountFireFox();
+            addToWishlist.SelectMyWishlistFireFox();
+            addToWishlist.SelectViewMyWishlistFireFox();
+            addToWishlist.VerifyWishlistDetailsFireFox().Should().Contain("Printed Chiffon Dress");
+
+            //Edge
+            addToWishlist.SelectDressesCategoryEdge();
+            addToWishlist.SelectWomensChifonDressEdge();
+            addToWishlist.SelectAddToWishlistEdge();
+            addToWishlist.VerifyFancyErrorEdge().Should().Be("Added to your wishlist.");
+            addToWishlist.CloseFancyErrorEdge();
+            addToWishlist.SelectViewMyAccountEdge();
+            addToWishlist.SelectMyWishlistEdge();
+            addToWishlist.SelectViewMyWishlistEdge();
+            addToWishlist.VerifyWishlistDetailsEdge().Should().Contain("Printed Chiffon Dress");
         }
 
     }

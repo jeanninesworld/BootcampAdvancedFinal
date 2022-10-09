@@ -456,14 +456,10 @@ namespace BootcampAdvancedFinal.Helpers
             try
             {
                 _wait = new WebDriverWait(driver, timeout);
-                //_wait = new WebDriverWait(fireFox, timeout);
-                //_wait = new WebDriverWait(edgeDriver, timeout);
                 _wait.PollingInterval = TimeSpan.FromMilliseconds(500);
                 _wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
                 _wait.Until(drv => drv.FindElement(locator).Displayed == true);
                 element = driver.FindElement(locator);
-                //element = fireFox.FindElement(locator);
-                //element = edgeDriver.FindElement(locator);
             }
             catch (WebDriverTimeoutException ex)
             {

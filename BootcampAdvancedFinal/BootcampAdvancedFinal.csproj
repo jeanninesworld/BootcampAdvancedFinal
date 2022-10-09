@@ -203,6 +203,7 @@
   <ItemGroup>
     <Compile Include="DriverFactory\WebDriverFactory.cs" />
     <Compile Include="Helpers\WaitHelper.cs" />
+    <Compile Include="Pages\AddToWishlist.cs" />
     <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Pages\BrowserType.cs" />
     <Compile Include="Pages\CartPage.cs" />
